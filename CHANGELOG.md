@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-10-27 v2.6.1
+
+- Fixed: building `Dockerfile.canary-roce` failed in the image test battery at
+  `tests/test_roce_ring.py` (`ImageOverlay.test_overlay_selects_package`). The test still asserted
+  v2.5's two-way package selection in `pynccl.py`, which `runtime/roce_twoshot_adapt.py` turns into a
+  three-way one in v2.6. The test now asserts the v2.6 selection and the refusal of
+  `DSV41_ROCE_RING=1` together with `DSV41_ROCE_TWOSHOT=1`. No runtime change. Reported with the fix by
+  **Saolence** in #59.
+
 ## 2026-10-27 v2.6
 
 Production profile = v2.5 plus the two-shot all-reduce for wide steps and two prefill host-overhead
